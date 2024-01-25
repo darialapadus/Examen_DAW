@@ -2,6 +2,10 @@ using Examen.Data;
 using Examen.Helpers.Extensions;
 using Examen.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Examen_DAW.Repositories.EventRepository;
+using Examen_DAW.Services.EventService;
+using Examen_DAW.Services.ParticipantService;
+using Examen_DAW.Repositories.ParticipantRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +18,13 @@ builder.Services.AddControllers();
 builder.Services.AddServices();
 builder.Services.AddRepositories();
 builder.Services.AddAutoMapper(typeof(MapperProfile));
+
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IEventService, EventService>();
+
+builder.Services.AddScoped<IParticipantRepository, ParticipantRepository>();
+builder.Services.AddScoped<IParticipantService, ParticipantService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
